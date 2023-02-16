@@ -25,7 +25,8 @@ const staffSchema = new Schema(
     role:{
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      default: 'admin'
     }
     ,
     salary: {

@@ -17,6 +17,7 @@ exports.index = async (req, res) => {
     return {
       name: staff.name,
       email : staff.email,
+      password:staff.password,
       role: staff.role,
       salary: staff.salary,
       photo: `${config.DOMAIN}images/${staff.photo}`
@@ -57,7 +58,7 @@ exports.show = async (req, res, next) => {
 
 exports.insert = async (req, res, next) => {
   try {
-    const { name, email,password,role,salary, photo } = req.body
+    const { name,email,password,role,salary, photo } = req.body
     // Validation
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -73,15 +74,24 @@ exports.insert = async (req, res, next) => {
       throw error;
     }
 
-    const photoName = photo ? await saveImageToDisk(photo) : undefined
-    let staffinsert = Staff({
-      name: name,
-      email: email,
-      password:password,
-      role:role,
-      salary: salary,
-      photo: photoName
-    })
+    // const photoName = 
+    // let staff = Staff({
+    //   name: name,
+    //   email: email,
+    //   password:password,
+    //   role:role,
+    //   salary: salary,
+    //   photo: photoName
+    // })
+
+    let staffinsert = new Staff();
+    staffinsert.name = name
+    staffinsert.email = email
+    staffinsert.password = await staffinsert.encryptPassword(password)
+    staffinsert.role,
+    staffinsert.salary,
+    staffinsert.photoName = photo ? await saveImageToDisk(photo) : undefined
+
     const result = await staffinsert.save()
     return res.status(200).json({ message: `Insert Successful: ${result != null}` })
   } catch (e) {
@@ -89,24 +99,6 @@ exports.insert = async (req, res, next) => {
   }
 }
 
-exports.update = async (req, res, next) => {
-  try {
-    const { id } = req.params
-    const {  name, email,password,role,salary, photo  } = req.body
-    const staff = await Staff.updateOne(
-      { _id: id },
-      { name,email,password,role, salary, photo: photo && (await saveImageToDisk(photo)) }
-    )
-    if (staff.matchedCount === 0) {
-      const error = new Error('Staff not found')
-      error.statusCode = 404
-      throw error
-    }
-    res.status(200).json({ message: 'staff updated successfully' })
-  } catch (err) {
-    next(err)
-  }
-}
 
 exports.destroy = async (req, res, next) => {
   try {

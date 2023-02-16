@@ -48,22 +48,6 @@ router.post(
   ],
   userController.login
 )
-//update User by admin
-router.put('/:id',
-  [
-  body('name').not().isEmpty().withMessage('Name cannot be empty'),
-  body('email')
-    .not()
-    .isEmpty()
-    .withMessage('Email cannot be empty')
-    .isEmail()
-    .withMessage('Email is not correctly formatted'),
-  body('password')
-    .not()
-    .isEmpty()
-    .withMessage('Password cannot be empty')
-    .isLength({ min: 5 })
-    .withMessage('Password length must be as least 5 characters')], userController.update)   
 //delete use by admin
 router.delete('/:id', [passportJWT.isLogin, checkAdmin.isAdmin], userController.delete)
 

@@ -57,6 +57,7 @@ exports.register = async (req, res, next) => {
   }
 
 }
+
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -123,25 +124,7 @@ exports.delete = async (req, res, next) => {
   }
 }
 
-//update 
-exports.update = async (req, res, next) => {
-  try {
-    const { id } = req.params
-    const { name, email, password } = req.body
-    const user = await User.updateOne(
-      { _id: id },
-      {  name, email, password  }
-    )
-    if (user.matchedCount === 0) {
-      const error = new Error('๊User not found')
-      error.statusCode = 404
-      throw error
-    }
-    res.status(200).json({ message: '๊User updated successfully' })
-  } catch (err) {
-    next(err)
-  }
-}
+
 
 exports.profile = async function (req, res, next) {
   const user = await User.find().select('Name Photo Locaton').sort({ id: -1 });

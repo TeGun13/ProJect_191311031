@@ -57,8 +57,7 @@ router.post(
   ],
   staffController.loginn
 )
-//update
-router.put('/:id', [ passportJWT.isLogin,checkAdmin.isAdmin],staffController.update)
+
 router.delete('/:id',[ passportJWT.isLogin,checkAdmin.isAdmin], staffController.destroy)
 
 

@@ -8,10 +8,8 @@ const MoRouter = require("../controllers/monitorController");
 
 
 
-//get Brand
+//get Producr
 router.get('/', MoRouter.get);
-//get Product
-router.get('/product', MoRouter.getproduct);
 
 //delete
 router.delete('/:id',[passportJWT.isLogin, checkAdmin.isAdmin], MoRouter.destroy);

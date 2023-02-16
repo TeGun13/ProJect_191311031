@@ -11,18 +11,28 @@ const monitorSchema = new Schema({
     createdAt: { type: Date, default: Date.now }, //มองกูดสร้างให้เอง ต้องให้ ทามสแสม ทรู
     updatedAt: { type: Date, default: Date.now },
 
+
 }, {
-    toJSON: { virtuals: true }, collection: 'monitors', timestamps: true
-},
-
-
-
+    timestamps: true,
+    toJSON: { virtuals: true },
+    virtuals: {
+        productDetail: {
+        options: { ref: "productDetail", localField: "_id", foreignField: "product" },
+      },
+    },
+  }
 );
-monitorSchema.virtual('monitors', {
-    ref: 'Monitors',
-    localField: '_id',
-    foreignField: 'monitor'
-})
+//     toJSON: { virtuals: true }, collection: 'monitors', timestamps: true
+// },
+
+
+
+// );
+// monitorSchema.virtual('productDetails', {
+//     ref: 'productDetails',
+//     localField: '_id',
+//     foreignField: 'brand'
+// })
 
 const monitor = mongoose.model("Monitor", monitorSchema);
 
