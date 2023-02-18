@@ -5,8 +5,9 @@ const { body } = require('express-validator')
 const passportJWT = require('../middleware/passportJWT')
 const checkAdmin = require('../middleware/checkAdmin');
 
-router.get('/', [passportJWT.isLogin], staffController.index)
-router.get('/:id', staffController.show)
+router.get('/',[ passportJWT.isLogin,checkAdmin.isAdmin], staffController.index)
+router.get('/:id', [ passportJWT.isLogin,checkAdmin.isAdmin], staffController.show)
+
 //register
 router.post(
   '/',
@@ -57,12 +58,6 @@ router.post(
   ],
   staffController.loginn
 )
-
 router.delete('/:id',[ passportJWT.isLogin,checkAdmin.isAdmin], staffController.destroy)
-
-
-
-
-
 
 module.exports = router

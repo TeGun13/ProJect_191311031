@@ -123,21 +123,3 @@ exports.delete = async (req, res, next) => {
     next(err)
   }
 }
-
-
-
-exports.profile = async function (req, res, next) {
-  const user = await User.find().select('Name Photo Locaton').sort({ id: -1 });
-  const users = user.map((user,index) => {
-    return {
-        name:user.name,
-        email:user.email,
-        role:user.role
-    }
-})
-  res.status(200).json({
-      data:users
-  })
-
-
-}

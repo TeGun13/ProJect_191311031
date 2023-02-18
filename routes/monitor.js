@@ -6,8 +6,6 @@ const checkAdmin = require('../middleware/checkAdmin');
 
 const MoRouter = require("../controllers/monitorController");
 
-
-
 //get Producr
 router.get('/', MoRouter.get);
 
@@ -40,7 +38,6 @@ router.post('/',
 
     ]
     , MoRouter.insert);
-
 //add brand Detail
 router.post("/:id", [passportJWT.isLogin, checkAdmin.isAdmin,
 body('model')
@@ -59,7 +56,6 @@ body('quantity')
     .isNumeric()
     .withMessage(" must be a number"),
 ], MoRouter.insertDetail);
-
 
 //update product
 router.put('/:id', [passportJWT.isLogin, checkAdmin.isAdmin,], MoRouter.update);

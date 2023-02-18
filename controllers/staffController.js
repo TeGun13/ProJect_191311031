@@ -25,30 +25,20 @@ exports.index = async (req, res) => {
   })
   res.send({ data: staffWithPhotoDomain })
 }
+
 //Staff with id
 exports.show = async (req, res, next) => {
   try {
-
-    const checkstaff = await Staff.findById(req.params.id)
-    if (!checkstaff) {
+    const { id } = req.params
+    const staff = await Staff.findById(id)
+    if (!staff) {
       const error = new Error('Staff not found')
       error.statusCode = 404
       throw error
     }
 
-    const staff = await Staff.find().sort({ _id: -1 });
-    const staffs = staff.map((staff,index) => {
-      return {
-        name: staff.name,
-        email : staff.email,
-        role: staff.role,
-        salary: staff.salary,
-        photo: `${config.DOMAIN}images/${staff.photo}`
-      }
-
-  })
     res.status(200).json({
-        data: staffs
+        data: staff
   
   })
   } catch (err) {

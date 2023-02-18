@@ -143,7 +143,6 @@ exports.insertDetail = async (req, res, next) => {
 };
 
 
-//ยังไม่ได้ทำ
 exports.update = async (req, res, next) => {
 
   try {

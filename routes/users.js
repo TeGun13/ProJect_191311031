@@ -6,7 +6,6 @@ const passportJWT = require('../middleware/passportJWT')
 const checkAdmin = require('../middleware/checkAdmin')
 
 router.get('/', userController.index)
-router.get('/me', [passportJWT.isLogin], userController.profile)
 
 
 //register
@@ -50,7 +49,5 @@ router.post(
 )
 //delete use by admin
 router.delete('/:id', [passportJWT.isLogin, checkAdmin.isAdmin], userController.delete)
-
-
 
 module.exports = router
