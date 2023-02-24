@@ -5,7 +5,7 @@ const { body } = require('express-validator')
 const passportJWT = require('../middleware/passportJWT')
 const checkAdmin = require('../middleware/checkAdmin')
 
-router.get('/', userController.index)
+router.get('/', [passportJWT.isLogin, checkAdmin.isAdmin], userController.index)
 
 
 //register
