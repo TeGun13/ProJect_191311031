@@ -17,7 +17,7 @@ const monitorSchema = new Schema({
     toJSON: { virtuals: true },
     virtuals: {
         productDetail: {
-        options: { ref: "productDetail", localField: "_id", foreignField: "product" },
+        options: { ref: "productDetails", localField: "_id", foreignField: "product" },
       },
     },
   }
