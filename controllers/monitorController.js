@@ -24,7 +24,7 @@ exports.getproduct = async (req, res, next) => {
   const monitors = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity']);
   const details = detail.map((detail, index) => {
     return {
-      Product:monitors,
+      name:monitors,
       model: detail.model,
       price: detail.price,
       quantity: detail.quantity,
