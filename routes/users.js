@@ -28,6 +28,7 @@ router.post(
   ],
   userController.register
 )
+
 //login
 router.post(
   '/login',
