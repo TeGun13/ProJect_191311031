@@ -7,7 +7,7 @@ const { validationResult } = require('express-validator')
 const jwt = require("jsonwebtoken");
 
 const Staff = require('../models/staff')
-const config = require('../config')
+const config = require("../config/index");
 
 
 //Staff view
@@ -20,7 +20,7 @@ exports.index = async (req, res) => {
       password:staff.password,
       role: staff.role,
       salary: staff.salary,
-      photo: `${config.DOMAIN}images/${staff.photo}`
+      photo: config.Domain + "/images/" + staff.photo
     }
   })
   res.send({ data: staffWithPhotoDomain })
