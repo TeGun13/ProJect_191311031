@@ -13,7 +13,7 @@ const productDetail = require('../models/productDetails');
 
 //all brand  for user
 exports.get = async (req, res, next) => {
-  const monitors = await Monitor.find().sort({ _id: -1 }).populate("productDetail", ['model', 'price', 'quantity']);
+  const monitors = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity']);
   res.status(200).json({
    data:monitors
   });
@@ -21,8 +21,10 @@ exports.get = async (req, res, next) => {
 //all product detail for user
 exports.getproduct = async (req, res, next) => {
   const detail = await Detail.find().sort({ _id: -1 });
+  const monitors = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity']);
   const details = detail.map((detail, index) => {
     return {
+      Product:monitors,
       model: detail.model,
       price: detail.price,
       quantity: detail.quantity,

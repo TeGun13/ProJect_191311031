@@ -7,7 +7,7 @@ const checkAdmin = require('../middleware/checkAdmin');
 const MoRouter = require("../controllers/monitorController");
 
 //get Producr
-router.get('/', MoRouter.get);
+router.get('/', MoRouter.getproduct);
 
 
 //delete
