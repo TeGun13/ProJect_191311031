@@ -36,10 +36,8 @@ exports.show = async (req, res, next) => {
       error.statusCode = 404
       throw error
     }
-
     res.status(200).json({
         data: staff
-  
   })
   } catch (err) {
     next(err)
