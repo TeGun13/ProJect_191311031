@@ -7,16 +7,16 @@ const jwt = require("jsonwebtoken");
 
 exports.index = async  (req, res, next)=> {
   const user = await User.find().sort({ _id: -1 });
-  const users = user.map((user,index) => {
-    return {
-        name:user.name,
-        email:user.email,
-        role:user.role,
-       
-    }
-})
+//   const users = user.map((user,index) => {
+//     return {
+//         name:user.name,
+//         email:user.email,
+//         role:user.role,
+
+//     }
+// })
   res.status(200).json({
-      data: users
+      data: user
 
 })
 }
