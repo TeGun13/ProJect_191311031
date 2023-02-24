@@ -12,9 +12,9 @@ const { validationResult } = require("express-validator")
 
 //all brand  for user
 exports.get = async (req, res, next) => {
-  const monitor = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity']);
+  const monitors = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity']);
   res.status(200).json({
-    data: monitor
+    data: monitors
   });
 }
 //all product detail for user
