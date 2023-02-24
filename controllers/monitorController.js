@@ -12,7 +12,7 @@ const { validationResult } = require("express-validator")
 
 //all brand  for user
 exports.get = async (req, res, next) => {
-  const monitor = await Monitor.find().populate("productDetails");
+  const monitor = await Monitor.find().populate("productDetail");
   res.status(200).json({
     data: monitor
   });
@@ -32,7 +32,6 @@ exports.getproduct = async (req, res, next) => {
 
   })
 }
-
 
 exports.destroy = async (req, res) => {
   try {
