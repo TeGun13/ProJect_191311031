@@ -9,6 +9,7 @@ const MoRouter = require("../controllers/monitorController");
 //get Producr
 router.get('/', MoRouter.get);
 
+
 //delete
 router.delete('/:id',[passportJWT.isLogin, checkAdmin.isAdmin], MoRouter.destroy);
 router.delete('/detail/:id',[passportJWT.isLogin, checkAdmin.isAdmin], MoRouter.detaildestroy);

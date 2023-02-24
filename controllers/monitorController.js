@@ -33,6 +33,7 @@ exports.getproduct = async (req, res, next) => {
   })
 }
 
+
 exports.destroy = async (req, res) => {
   try {
     const { id } = req.params
