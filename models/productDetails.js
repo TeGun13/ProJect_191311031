@@ -10,7 +10,7 @@ const productDetailSchema = new Schema(
     updatedAt: { type: Date, default: Date.now },
     product: { type: Schema.Types.ObjectId},
   },
-  { collection: "productDetail" }
+  { collection: "productDetails" }
 );
 
 const productDetail = mongoose.model("productDetail", productDetailSchema);

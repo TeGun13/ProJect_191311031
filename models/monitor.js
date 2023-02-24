@@ -12,28 +12,30 @@ const monitorSchema = new Schema({
     updatedAt: { type: Date, default: Date.now },
 
 
-}, {
-    timestamps: true,
-    toJSON: { virtuals: true },
-    collection: "monitors" ,
-    virtuals: {
-      productDetail: {
-        options: { ref: "productDetail", localField: "_id", foreignField: "product" },
-      },
-    },
-  }
-);
-//     toJSON: { virtuals: true }, collection: 'monitors', timestamps: true
-// },
-
-
-
+ },{
+// {
+//     timestamps: true,
+//     toJSON: { virtuals: true },
+//     collection: "monitors" ,
+//     virtuals: {
+//       productDetail: {
+//         options: { ref: "productDetail", localField: "_id", foreignField: "product" },
+//       },
+//     },
+//   }
 // );
-// monitorSchema.virtual('productDetails', {
-//     ref: 'productDetails',
-//     localField: '_id',
-//     foreignField: 'brand'
-// })
+
+    toJSON: { virtuals: true }, collection: 'monitors', timestamps: true
+},
+
+
+
+);
+monitorSchema.virtual('productDetail', {
+    ref: 'productDetail',
+    localField: '_id',
+    foreignField: 'product'
+})
 
 const monitor = mongoose.model("Monitor", monitorSchema);
 

@@ -1,14 +1,12 @@
 const Monitor = require('../models/monitor')
 const Detail = require('../models/productDetails')
-const config = require('../config')
 
 const fs = require('fs');
-const path = require('path');
-const uuidv4 = require('uuid');
+
 const { promisify } = require('util')
-const writeFileAsync = promisify(fs.writeFile)
+
 const { validationResult } = require("express-validator");
-const productDetail = require('../models/productDetails');
+
 
 
 //all brand  for user
