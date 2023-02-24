@@ -7,14 +7,15 @@ const path = require('path');
 const uuidv4 = require('uuid');
 const { promisify } = require('util')
 const writeFileAsync = promisify(fs.writeFile)
-const { validationResult } = require("express-validator")
+const { validationResult } = require("express-validator");
+const productDetail = require('../models/productDetails');
 
 
 //all brand  for user
 exports.get = async (req, res, next) => {
-  const monitors = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity']);
+  const monitors = await Monitor.find().sort({ _id: -1 }).populate("productDetail", ['model', 'price', 'quantity']);
   res.status(200).json({
-    data: monitors
+   data:monitors
   });
 }
 //all product detail for user
