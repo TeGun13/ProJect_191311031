@@ -19,7 +19,7 @@ exports.get = async (req, res, next) => {
 }
 //all product detail for user
 exports.getproduct = async (req, res, next) => {
-  const detail = await Monitor.find().sort({ _id: -1 });
+  const detail = await Detail.find().sort({ _id: -1 });
   const details = detail.map((detail, index) => {
     return {
       model: detail.model,
