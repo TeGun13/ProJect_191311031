@@ -33,7 +33,7 @@ exports.product = async (req, res, next) => {
   const { id } = req.params
  const monitors = await Monitor.findById(id).populate("productDetail", ['model', 'price', 'quantity','photo', 'detail']);
   res.status(200).json({
-    deta: monitors
+    data: monitors
   });
 }
 
