@@ -89,7 +89,7 @@ exports.detaildestroy = async (req, res) => {
 exports.insert = async (req, res, next) => {
   try {
     // res.render('index', { title: 'Express' });
-    const { title, detail,photo } = req.body;
+    const { title, detail,picture } = req.body;
 
     //validation  
     const errors = validationResult(req);
@@ -110,7 +110,7 @@ exports.insert = async (req, res, next) => {
     let monitor = new Monitor({
       title: title,
       detail: detail,
-      photo: photo ? await saveImageToDisk(photo) : undefined
+      picture: picture ? await saveImageToDisk(picture) : undefined
     });
     await monitor.save()
 
@@ -132,7 +132,7 @@ exports.insertDetail = async (req, res, next) => {
       error.statusCode = 400;
       throw error;
     } else {
-      const { model, price, quantity, detail, photo } = req.body;
+      const { model, price, quantity, detail, picture } = req.body;
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         const error = new Error("ข้อมูลไม่ครบถ้วน");
@@ -148,7 +148,7 @@ exports.insertDetail = async (req, res, next) => {
         detail: detail,
         // photo :config.Domain + "/images/" + photo
 
-        photo: photo ? await saveImageToDisk(photo) : undefined
+        picture: picture ? await saveImageToDisk(picture) : undefined
       });
 
       // const detail = new Detail();
