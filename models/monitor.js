@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 const monitorSchema = new Schema({
     // photo: { type: String, default: 'nopic.png' },
     brand: {type: String, require: true, trim: true},
+    detail:{ type: String, require: true},
     // modelName: { type: String, require: true, trim: true },
     // price: { type: Number, require: true, trim: true },
     // amount: { type: Number, require: true, trim: true },

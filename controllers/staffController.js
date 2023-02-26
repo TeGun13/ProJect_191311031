@@ -20,7 +20,7 @@ exports.index = async (req, res) => {
       password:staff.password,
       role: staff.role,
       salary: staff.salary,
-      // photo: config.Domain + "/images/" + staff.photo
+      photo:  config.Domain + "/images/" + staff.photo
     }
   })
   res.send({ data: staffWithPhotoDomain })
