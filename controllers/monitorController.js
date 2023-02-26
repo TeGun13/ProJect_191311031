@@ -30,7 +30,8 @@ exports.get = async (req, res, next) => {
 }
 
 exports.product = async (req, res, next) => {
- const monitors = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity','photo', 'detail']);
+  const { id } = req.params
+ const monitors = await Monitor.findById(id).populate("productDetail", ['model', 'price', 'quantity','photo', 'detail']);
   res.status(200).json({
     deta: monitors
   });
