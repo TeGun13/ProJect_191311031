@@ -11,7 +11,7 @@ const monitorSchema = new Schema({
     // amount: { type: Number, require: true, trim: true },
     createdAt: { type: Date, default: Date.now }, //มองกูดสร้างให้เอง ต้องให้ ทามสแสม ทรู
     updatedAt: { type: Date, default: Date.now },
-    photo: {
+    picture: {
         type: String,
         default: 'nopic.png'
       }
