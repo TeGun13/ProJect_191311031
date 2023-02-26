@@ -11,7 +11,7 @@ const productDetailSchema = new Schema(
     // updatedAt: { type: Date, default: Date.now },
     product: { type: Schema.Types.ObjectId},
     detail:{ type: String, require: true},
-    photo: {
+    picture: {
       type: String,
       default: 'nopic.png'
     }

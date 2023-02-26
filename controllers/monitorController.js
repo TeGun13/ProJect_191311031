@@ -22,7 +22,7 @@ exports.get = async (req, res, next) => {
       model: monitors.model,
       id:monitors._id,
       title: monitors.title,
-      photo: config.Domain + ".cyclic.app/images/" + monitors.photo,
+      picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
 
     }
   })
@@ -42,7 +42,7 @@ exports.getproduct = async (req, res, next) => {
       product_id:detail._id,
       price: detail.price,
       detail: detail.detail,
-      photo: config.Domain + ".cyclic.app/images/" + detail.photo,
+      picture: config.Domain + ".cyclic.app/images/" + detail.picture,
       quantity: detail.quantity,
 
     }
