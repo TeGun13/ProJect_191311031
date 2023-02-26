@@ -39,7 +39,7 @@ exports.getproduct = async (req, res, next) => {
     return {
       model: detail.model,
       brand_id:detail.product,
-      product_id:detail._id,
+      id:detail._id,
       price: detail.price,
       detail: detail.detail,
       picture: config.Domain + ".cyclic.app/images/" + detail.picture,
