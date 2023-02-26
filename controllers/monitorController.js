@@ -12,10 +12,22 @@ const config = require("../config/index");
 
 //all brand  for user
 exports.get = async (req, res, next) => {
-  const monitors = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity','photo', 'detail']);
-  res.status(200).json({
-    deta: monitors
-  });
+  // const monitors = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity','photo', 'detail']);
+  // res.status(200).json({
+  //   deta: monitors
+  // });
+  const monitors = await Monitor.find().sort({ _id: -1 });
+  const monitor = monitors.map((monitors, index) => {
+    return {
+      model: monitors.model,
+      id:monitors._id,
+      brand: monitors.brand,
+      photo: config.Domain + "/images/" + monitors.photo,
+
+    }
+  })
+  res.send({ data: monitor })
+
 
 }
 
