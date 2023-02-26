@@ -27,28 +27,13 @@ exports.get = async (req, res, next) => {
     }
   })
   res.send({ data: monitor })
-
-
 }
 
 exports.product = async (req, res, next) => {
-
-  const detail = await Detail.find().sort({ _id: -1 });
-  const details = detail.map((detail, index) => {
-    return {
-      model: detail.model,
-      brand_id:detail.product,
-      id:detail._id,
-      price: detail.price,
-      detail: detail.detail,
-      picture: config.Domain + ".cyclic.app/images/" + detail.picture,
-      quantity: detail.quantity,
-
-    }
-  })
-
-  res.send({ data: details })
-
+ const monitors = await Monitor.find().populate("productDetail", ['model', 'price', 'quantity','photo', 'detail']);
+  res.status(200).json({
+    deta: monitors
+  });
 }
 
 //all product detail for user
