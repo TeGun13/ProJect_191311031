@@ -21,7 +21,7 @@ exports.get = async (req, res, next) => {
     return {
       model: monitors.model,
       id:monitors._id,
-      brand: monitors.brand,
+      title: monitors.title,
       photo: config.Domain + "/images/" + monitors.photo,
 
     }
@@ -89,7 +89,7 @@ exports.detaildestroy = async (req, res) => {
 exports.insert = async (req, res, next) => {
   try {
     // res.render('index', { title: 'Express' });
-    const { brand, detail,photo } = req.body;
+    const { title, detail,photo } = req.body;
 
     //validation  
     const errors = validationResult(req);
@@ -108,7 +108,7 @@ exports.insert = async (req, res, next) => {
     }
 
     let monitor = new Monitor({
-      brand: brand,
+      title: title,
       detail: detail,
       photo: photo ? await saveImageToDisk(photo) : undefined
     });
@@ -183,10 +183,10 @@ exports.update = async (req, res, next) => {
 
   try {
     const { id } = req.params
-    const { brand, detail } = req.body
+    const { title, detail } = req.body
 
     const monitor = await Monitor.updateOne({ _id: id }, {
-      brand: brand,
+      title: title,
       detail: detail
     });
 
