@@ -76,7 +76,7 @@ exports.detaildestroy = async (req, res) => {
 exports.insert = async (req, res, next) => {
   try {
     // res.render('index', { title: 'Express' });
-    const { brand, detail } = req.body;
+    const { brand, detail,photo } = req.body;
 
     //validation  
     const errors = validationResult(req);
@@ -96,7 +96,8 @@ exports.insert = async (req, res, next) => {
 
     let monitor = new Monitor({
       brand: brand,
-      detail: detail
+      detail: detail,
+      photo: photo ? await saveImageToDisk(photo) : undefined
     });
     await monitor.save()
 
