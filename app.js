@@ -16,9 +16,11 @@ const staffController =require('./routes/staff')
 
 const errorHandle = require('./middleware/errorHandle')
 
+var cors = require('cors')
+
 var app = express();
 monogoose.connect(config.MONGODB_URI,{useNewUrlParser: true, useUnifiedTopology: true})
-
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json({
     limit:'50mb'
