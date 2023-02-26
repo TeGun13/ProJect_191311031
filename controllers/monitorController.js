@@ -31,6 +31,26 @@ exports.get = async (req, res, next) => {
 
 }
 
+exports.product = async (req, res, next) => {
+
+  const detail = await Detail.find().sort({ _id: -1 });
+  const details = detail.map((detail, index) => {
+    return {
+      model: detail.model,
+      brand_id:detail.product,
+      id:detail._id,
+      price: detail.price,
+      detail: detail.detail,
+      picture: config.Domain + ".cyclic.app/images/" + detail.picture,
+      quantity: detail.quantity,
+
+    }
+  })
+
+  res.send({ data: details })
+
+}
+
 //all product detail for user
 exports.getproduct = async (req, res, next) => {
 
