@@ -222,12 +222,13 @@ exports.update = async (req, res, next) => {
 
   try {
     const { id } = req.params
-    const { title, detail,brandid } = req.body
+    const { title, detail,brandid,picture} = req.body
 
     const monitor = await Monitor.updateOne({ _id: id }, {
       title: title,
       detail: detail,
-      brandid:brandid
+      brandid:brandid,
+       picture: picture ? await saveImageToDisk(picture) : undefined
     });
 
     if (monitor.matchedCount === 0) {
