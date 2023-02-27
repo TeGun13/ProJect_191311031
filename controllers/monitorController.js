@@ -40,6 +40,7 @@ exports.product = async (req, res, next) => {
     id:monitors._id,
     price: monitors.price,
     picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
+    detail:monitors.detail
 
   }
 })
