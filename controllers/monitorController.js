@@ -21,7 +21,7 @@ exports.get = async (req, res, next) => {
     return {
       model: monitors.model,
       id:monitors._id,
-      title: monitors.title,
+      title: monitors.brand,
       picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
 
     }
@@ -108,7 +108,7 @@ exports.detaildestroy = async (req, res) => {
 exports.insert = async (req, res, next) => {
   try {
     // res.render('index', { title: 'Express' });
-    const { title, detail,picture } = req.body;
+    const { brand, detail,picture } = req.body;
 
     //validation  
     const errors = validationResult(req);
@@ -127,7 +127,7 @@ exports.insert = async (req, res, next) => {
     }
 
     let monitor = new Monitor({
-      title: title,
+      brand: brand,
       detail: detail,
       picture: picture ? await saveImageToDisk(picture) : undefined
     });
@@ -274,4 +274,3 @@ const decodeBase64Image = (base64Str) => {
   image.data = matches[2]
   return image
 }
-
