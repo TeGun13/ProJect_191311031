@@ -35,6 +35,7 @@ exports.product = async (req, res, next) => {
   const monitorB = await Detail.find({brandid:id})
  const monitors = await monitorB.map((monitors, index) => {
   return {
+    title: monitors.title,
     model: monitors.model,
     brandid:monitors.brandid,
     id:monitors._id,
@@ -49,16 +50,17 @@ res.send({ data: monitors })
 
 //all product detail for user
 exports.getproduct = async (req, res, next) => {
-
-  const detail = await Detail.find().sort({ _id: -1 });
-  const details = detail.map((monitors, index) => {
+  const monitorB = await Detail.find({comment:'1'})
+  const details = monitorB.map((monitors, index) => {
     return {
+      comment:monitors.comment,
       model: monitors.model,
       brandid:monitors.brandid,
       id:monitors._id,
       price: monitors.price,
       picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
-      detail:monitors.detail
+      detail:monitors.detail,
+      title: monitors.title,
     }
   })
   res.send({ data: details })
@@ -146,7 +148,7 @@ exports.insertDetail = async (req, res, next) => {
       error.statusCode = 400;
       throw error;
     } else {
-      const { model, price, quantity, detail, picture } = req.body;
+      const {title, model, price, quantity, detail, picture } = req.body;
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         const error = new Error("ข้อมูลไม่ครบถ้วน");
@@ -155,6 +157,7 @@ exports.insertDetail = async (req, res, next) => {
         throw error;
       }
       const details = new Detail({
+        title: title,
         product: id,
         model: model,
         price: price,
@@ -220,10 +223,10 @@ exports.updatedetail = async (req, res, next) => {
 
   try {
     const { id } = req.params
-    const { model, price, quantity, detail,brandid} = req.body
+    const { comment,model, price, quantity, detail,brandid} = req.body
 
     const details = await Detail.updateOne({ _id: id }, {
-      model: model, price: price, quantity: quantity, detail: detail,brandid:brandid
+      comment:comment, model: model, price: price, quantity: quantity, detail: detail,brandid:brandid
     });
 
     if (details.matchedCount === 0) {
