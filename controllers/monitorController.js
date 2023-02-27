@@ -21,7 +21,7 @@ exports.get = async (req, res, next) => {
     return {
       model: monitors.model,
       id:monitors._id,
-      title: monitors.brand,
+      title: monitors.title,
       picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
 
     }
@@ -108,7 +108,7 @@ exports.detaildestroy = async (req, res) => {
 exports.insert = async (req, res, next) => {
   try {
     // res.render('index', { title: 'Express' });
-    const { brand, detail,picture } = req.body;
+    const { title, detail,picture } = req.body;
 
     //validation  
     const errors = validationResult(req);
@@ -119,7 +119,7 @@ exports.insert = async (req, res, next) => {
       throw error;
     }
 
-    const exitBrand = await Monitor.findOne({ brand: brand })
+    const exitBrand = await Monitor.findOne({ title: title })
     if (exitBrand) {
       const error = new Error("Already have this brand in system");
       error.statusCode = 400
@@ -127,7 +127,7 @@ exports.insert = async (req, res, next) => {
     }
 
     let monitor = new Monitor({
-      brand: brand,
+      title: title,
       detail: detail,
       picture: picture ? await saveImageToDisk(picture) : undefined
     });
