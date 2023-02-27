@@ -40,6 +40,7 @@ exports.getdetailproduct = async (req, res, next) => {
     model: monitors.model,
     brandid:monitors.brandid,
     id:monitors._id,
+    quantity:monitors.quantity,
     price: monitors.price,
     picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
     detail:monitors.detail
