@@ -30,6 +30,27 @@ exports.get = async (req, res, next) => {
   res.send({ data: monitor })
 }
 
+
+exports.getdetailproduct = async (req, res, next) => {
+  const { id } = req.params
+  const monitorB = await Detail.find({_id:id})
+ const monitors = await monitorB.map((monitors, index) => {
+  return {
+    title: monitors.title,
+    model: monitors.model,
+    brandid:monitors.brandid,
+    id:monitors._id,
+    price: monitors.price,
+    picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
+    detail:monitors.detail
+
+  }
+})
+res.send({ data: monitors })
+}
+
+
+
 exports.product = async (req, res, next) => {
   const { id } = req.params
   const monitorB = await Detail.find({brandid:id})

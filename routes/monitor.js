@@ -10,6 +10,7 @@ const MoRouter = require("../controllers/monitorController");
 router.get('/', MoRouter.get);
 // router.get('/:id', MoRouter.getbrand);
 router.get('/product/:id', MoRouter.product);
+router.get('/getDproduct/:id', MoRouter.getdetailproduct);
 router.get('/repro/:id', MoRouter.getproduct);
 //delete
 router.delete('/:id',[passportJWT.isLogin, checkAdmin.isAdmin], MoRouter.destroy);
