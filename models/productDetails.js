@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const productDetailSchema = new Schema(
   {
+    brandid:{type: Number, require: true},
     model: { type: String, require: true, trim: true },
     price: { type: Number },
     quantity: { type: Number }, 

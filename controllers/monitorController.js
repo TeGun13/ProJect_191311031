@@ -20,6 +20,7 @@ exports.get = async (req, res, next) => {
   const monitor = monitors.map((monitors, index) => {
     return {
       model: monitors.model,
+      brandid:monitors.brandid,
       id:monitors._id,
       title: monitors.title,
       picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
@@ -31,7 +32,7 @@ exports.get = async (req, res, next) => {
 
 exports.product = async (req, res, next) => {
   const { id } = req.params
- const monitors = await Monitor.findById(id).populate("productDetail", ['model', 'price', 'quantity','photo', 'detail']);
+ const monitors = await Monitor.findById(id).populate("productDetail", ['model', 'price', 'quantity','photo', 'detail','brandid']);
   res.status(200).json({
     data: monitors
   });
@@ -108,7 +109,7 @@ exports.detaildestroy = async (req, res) => {
 exports.insert = async (req, res, next) => {
   try {
     // res.render('index', { title: 'Express' });
-    const { title, detail,picture } = req.body;
+    const { title, detail,picture,brandid } = req.body;
 
     //validation  
     const errors = validationResult(req);
@@ -128,6 +129,7 @@ exports.insert = async (req, res, next) => {
 
     let monitor = new Monitor({
       title: title,
+      brandid:brandid,
       detail: detail,
       picture: picture ? await saveImageToDisk(picture) : undefined
     });
@@ -202,11 +204,12 @@ exports.update = async (req, res, next) => {
 
   try {
     const { id } = req.params
-    const { title, detail } = req.body
+    const { title, detail,brandid } = req.body
 
     const monitor = await Monitor.updateOne({ _id: id }, {
       title: title,
-      detail: detail
+      detail: detail,
+      brandid:brandid
     });
 
     if (monitor.matchedCount === 0) {
@@ -224,10 +227,10 @@ exports.updatedetail = async (req, res, next) => {
 
   try {
     const { id } = req.params
-    const { model, price, quantity, detail } = req.body
+    const { model, price, quantity, detail,brandid} = req.body
 
     const details = await Detail.updateOne({ _id: id }, {
-      model: model, price: price, quantity: quantity, detail: detail
+      model: model, price: price, quantity: quantity, detail: detail,brandid:brandid
     });
 
     if (details.matchedCount === 0) {
