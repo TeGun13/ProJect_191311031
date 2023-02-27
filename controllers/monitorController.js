@@ -50,34 +50,18 @@ res.send({ data: monitors })
 //all product detail for user
 exports.getproduct = async (req, res, next) => {
 
-  try {
-    const { id } = req.params
-    const detail = await Detail.findById(id)
-    res.status(200).json({
-        data: detail
+  const detail = await Detail.find().sort({ _id: -1 });
+  const details = detail.map((monitors, index) => {
+    return {
+      model: monitors.model,
+      brandid:monitors.brandid,
+      id:monitors._id,
+      price: monitors.price,
+      picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
+      detail:monitors.detail
+    }
   })
-  res.send({ data: detail })
-
-  } catch (err) {
-    next(err)
-  }
-
-  // const { id } = req.params
-
-  // const detail = await Detail.findById(id)
-  // const details = detail.map((detail, index) => {
-  //   return {
-  //     model: detail.model,
-  //     brand_id:detail.product,
-  //     id:detail._id,
-  //     price: detail.price,
-  //     detail: detail.detail,
-  //     picture: config.Domain + ".cyclic.app/images/" + detail.picture,
-  //     quantity: detail.quantity,
-
-  //   }
-  // })
-
+  res.send({ data: details })
 
 
 }
