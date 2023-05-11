@@ -19,10 +19,10 @@ exports.get = async (req, res, next) => {
   const monitors = await Monitor.find().sort({ _id: -1 });
   const monitor = monitors.map((monitors, index) => {
     return {
-      model: monitors.model,
+      title: monitors.title,
       brandid:monitors.brandid,
       id:monitors._id,
-      title: monitors.title,
+      // title: monitors.title,
       picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
 
     }
@@ -75,6 +75,7 @@ exports.getproduct = async (req, res, next) => {
   const monitorB = await Detail.find({comment:'1'})
   const details = monitorB.map((monitors, index) => {
     return {
+      title: monitors.title,
       comment:monitors.comment,
       model: monitors.model,
       brandid:monitors.brandid,
@@ -82,7 +83,7 @@ exports.getproduct = async (req, res, next) => {
       price: monitors.price,
       picture: config.Domain + ".cyclic.app/images/" + monitors.picture,
       detail:monitors.detail,
-      title: monitors.title,
+   
     }
   })
   res.send({ data: details })
@@ -126,7 +127,7 @@ exports.detaildestroy = async (req, res) => {
 exports.insert = async (req, res, next) => {
   try {
     // res.render('index', { title: 'Express' });
-    const { title, detail,picture,brandid } = req.body;
+    const { title,detail,picture,brandid } = req.body;
 
     //validation  
     const errors = validationResult(req);
@@ -140,6 +141,13 @@ exports.insert = async (req, res, next) => {
     const exitBrand = await Monitor.findOne({ title: title })
     if (exitBrand) {
       const error = new Error("Already have this brand in system");
+      error.statusCode = 400
+      throw error;
+    }
+
+    const exitbrandid = await Monitor.findOne({ brandid: brandid })
+    if (exitbrandid) {
+      const error = new Error("Already have this brandid in system");
       error.statusCode = 400
       throw error;
     }
@@ -170,7 +178,7 @@ exports.insertDetail = async (req, res, next) => {
       error.statusCode = 400;
       throw error;
     } else {
-      const {title, model, price, quantity, detail, picture } = req.body;
+      const {title, model, price, quantity, detail, picture,brandid } = req.body;
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         const error = new Error("ข้อมูลไม่ครบถ้วน");
@@ -185,6 +193,7 @@ exports.insertDetail = async (req, res, next) => {
         price: price,
         quantity: quantity,
         detail: detail,
+        brandid: brandid,
         // photo :config.Domain + "/images/" + photo
 
         picture: picture ? await saveImageToDisk(picture) : undefined

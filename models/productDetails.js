@@ -16,7 +16,7 @@ const productDetailSchema = new Schema(
       type: String,
       default: 'nopic.png'
     },
-    comment:{type: Number,default: 'nopic.png'},
+    comment:{type: String,default: '-'},
   },
   { collection: "productDetails" }
 );

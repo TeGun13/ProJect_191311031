@@ -19,7 +19,7 @@ router.delete('/detail/:id',[passportJWT.isLogin, checkAdmin.isAdmin], MoRouter.
 //add brand
 router.post('/',
     [passportJWT.isLogin, checkAdmin.isAdmin,
-    body("brand")
+    body("title")
         .not().isEmpty()
         .withMessage("Name's brand cannot be empty."),
         // body("modelName")
