@@ -108,7 +108,7 @@ exports.loginn = async (req, res, next) => {
     const { email, password } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const error = new Error("ข้อมูลไม่ถูกต้อง");
+      const error = new Error("กรุณาใส่รหัสผ่านมากกว่า5ตัวอักษร");
       error.statusCode = 422;
       error.validation = errors.array();
       throw error;
